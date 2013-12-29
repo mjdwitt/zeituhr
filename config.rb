@@ -1,3 +1,6 @@
+require 'slim'
+require 'stylus'
+
 ###
 # Compass
 ###
