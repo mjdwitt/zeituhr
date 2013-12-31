@@ -1,0 +1,11 @@
+#time
+  span#hours
+    | {{current.hours | fixedDigits:2}}
+  span#minutes
+    | :{{current.minutes | fixedDigits:2}}
+  span#seconds
+    | :{{current.seconds | fixedDigits:2}}
+
+#timer.center
+  a.pure-button class="running-{{running}}" ng-click="toggleTimer()"
+    | {{buttonMessage}} Timer
