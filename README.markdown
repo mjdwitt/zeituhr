@@ -18,3 +18,31 @@ I'm building this with [Middleman](http://middlemanapp.com), so after cloning
 this, you can just run `middleman` in the projects root directory and navigate 
 to `localhost:4567` to see the results. Feel free to build it to static files 
 with `middleman build` and host it yourself, if you'd rather.
+
+## TODOs (and there a lot of them)
+
+If you went and did what I just told you to in the last section, you've probably 
+noticed by now that I lied. A lot. Nothing really works right now.
+
+Here's what I've actually got working so far:
+
+- Toggle the start/stop button
+
+And here's what Zeituhr *ought* to do in a little while:
+
+- Start timer when button is pressed and update display every second.
+- Stop timer when the button is pressed again.
+- Prompt user to write down what it was that they were doing while the clock 
+  ran.
+- Allow them to enter a project/client code as well.
+- Store all of that in localStorage. (This one really matters.)
+- Display a summary of the last 24 hours below the button.
+
+And here's a more vague wish-list for the future:
+
+- Allow user to click on a calendar to view any day's summary. (Most likely 
+  to be implemented.)
+- Display pretty graphs for all of the data.
+- Build invoices for client codes.
+- Build out a service for storing and syncing all of the data for registered 
+  users.
