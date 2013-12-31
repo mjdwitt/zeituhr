@@ -27,11 +27,11 @@ noticed by now that I lied. A lot. Nothing really works right now.
 Here's what I've actually got working so far:
 
 - Toggle the start/stop button
+- Start timer when button is pressed and update display every second.
+- Stop timer when the button is pressed again.
 
 And here's what Zeituhr *ought* to do in a little while:
 
-- Start timer when button is pressed and update display every second.
-- Stop timer when the button is pressed again.
 - Prompt user to write down what it was that they were doing while the clock 
   ran.
 - Allow them to enter a project/client code as well.

@@ -6,30 +6,30 @@ angular.module('timerFactories', []).
 
       // private data fields
       var intervalPromise;
-      var h = 0;
-      var m = 0;
-      var s = 0;
+      var time = {
+        h: 0,
+        m: 0,
+        s: 0
+      }
 
-      clock.hours   = function () { return h; };
-      clock.minutes = function () { return m; };
-      clock.seconds = function () { return s; };
+      clock.hours   = function () { return time.h; };
+      clock.minutes = function () { return time.m; };
+      clock.seconds = function () { return time.s; };
 
       clock.reset = function () {
-        h = 0;
-        m = 0;
-        s = 0;
+        time.h = 0;
+        time.m = 0;
+        time.s = 0;
       };
 
       clock.start = function () {
         clock.reset();
 
-        var startTime = new Date();
+        var startMillis = Date.now()
 
         var tick = function () {
-          var now = new Date();
-          h = now.getHours() - startTime.getHours();
-          m = now.getMinutes() - startTime.getMinutes();
-          s = now.getSeconds() - startTime.getSeconds();
+          var elapsedMillis = Date.now() - startMillis;
+          time = timeFromMilliseconds(elapsedMillis);
         };
 
         intervalPromise = $interval(tick, 1000);
@@ -40,4 +40,20 @@ angular.module('timerFactories', []).
       };
 
       return clock;
+
+      // private functions
+
+      function timeFromMilliseconds(millis) {
+        var time = {};
+
+        // throw away millisecond precision
+        var seconds = Math.floor(millis/1000);
+
+        time.h = Math.floor(seconds/3600);
+        seconds = seconds % 3600;
+        time.m = Math.floor(seconds/60);
+        time.s = seconds % 60;
+
+        return time;
+      }
     }]);
