@@ -1,6 +1,6 @@
 angular.module('timerFilters', []).
 
-  filter('fixedDigits', function () {
+  filter('minDigits', function () {
     return function (input, digits) {
       var n = parseInt(input);
       digits = parseInt(digits);
