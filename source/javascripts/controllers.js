@@ -1,21 +1,19 @@
 angular.module('timerControllers', []).
 
-  controller('simpleCtrl', ['$scope',
-    function ($scope) {
+  controller('timerCtrl', ['$scope', 'clock',
+    function ($scope, clock) {
       $scope.times = [];
       $scope.running = false;
       $scope.buttonMessage = 'Start';
 
-      $scope.current = {
-        hours: 0,
-        minutes: 0,
-        seconds: 0
-      };
+      $scope.clock = clock;
 
       $scope.toggleTimer = function() {
         if ($scope.running) {
+          clock.stop();
           $scope.buttonMessage = 'Start';
         } else {
+          clock.start();
           $scope.buttonMessage = 'Stop';
         }
 

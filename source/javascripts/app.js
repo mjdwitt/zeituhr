@@ -1,15 +1,16 @@
 angular.module('timer', [
   'ngRoute',
   'timerControllers',
-  'timerFilters'
+  'timerFilters',
+  'timerFactories'
 ]).
 
   config(['$routeProvider',
     function ($routeProvider) {
       $routeProvider.
         when('/', {
-          templateUrl: 'partials/simple.html',
-          controller: 'simpleCtrl'
+          templateUrl: 'partials/timer.html',
+          controller: 'timerCtrl'
         }).
         otherwise({
           redirectTo: '/'
