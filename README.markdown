@@ -15,7 +15,7 @@ it yourself.
 ## Building
 
 I'm building this with [Middleman](http://middlemanapp.com), so after cloning 
-this, you can just run `middleman` in the projects root directory and navigate 
+this, you can just run `middleman` in the project's root directory and navigate 
 to `localhost:4567` to see the results. Feel free to build it to static files 
 with `middleman build` and host it yourself, if you'd rather.
 
