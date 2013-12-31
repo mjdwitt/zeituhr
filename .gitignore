@@ -16,4 +16,7 @@
 # Ignore .DS_store file
 .DS_Store
 
+# ain't nobody want to hear what I'm thinking about
+thoughts.markdown
+
 .*.swp
