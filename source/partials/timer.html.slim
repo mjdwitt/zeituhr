@@ -7,5 +7,32 @@
     | :{{clock.seconds() | minDigits:2}}
 
 #timer.center
-  a.pure-button class="running-{{running}}" ng-click="toggleTimer()"
+  a.pure-button class="running-{{clock.running}}" ng-click="toggleTimer()"
     | {{buttonMessage}} Timer
+
+#recent
+  .pure-g-r
+    .pure-u-1-8
+
+    .pure-u-3-4
+      h2 Recent logs
+
+      table.pure-table.pure-table-striped
+        thead
+          tr
+            th Date
+            th Code
+            th Memo
+            th Time
+        tbody
+          tr ng-repeat="time in times"
+            td
+              | {{ time.date() }}
+            td
+              | {{ time.code() }}
+            td
+              | {{ time.description() }}
+            td
+              | {{ time.duration() }}
+
+    .pure-u-1-8

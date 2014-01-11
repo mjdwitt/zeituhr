@@ -1,22 +1,21 @@
-angular.module('timerControllers', []).
+angular.module('timerControllers', ['timerFactories'])
 
-  controller('timerCtrl', ['$scope', 'clock',
-    function ($scope, clock) {
-      $scope.times = [];
-      $scope.running = false;
+  .controller('timerCtrl', ['$scope', 'timeLogger',
+    function ($scope, timeLogger) {
+      $scope.clock = timeLogger.current;
+      $scope.times = timeLogger.entries;
+
       $scope.buttonMessage = 'Start';
 
-      $scope.clock = clock;
-
-      $scope.toggleTimer = function() {
-        if ($scope.running) {
-          clock.stop();
+      $scope.toggleTimer = function () {
+        if ($scope.clock.running) {
+          $scope.clock.stop();
+          $scope.clock.running = false;
           $scope.buttonMessage = 'Start';
         } else {
-          clock.start();
+          $scope.clock.start();
+          $scope.clock.running = true;
           $scope.buttonMessage = 'Stop';
         }
-
-        $scope.running = !$scope.running;
       };
     }]);

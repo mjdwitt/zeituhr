@@ -1,59 +1,72 @@
-angular.module('timerFactories', []).
+angular.module('timerFactories', [])
 
-  factory('clock', ['$interval',
-    function ($interval) {
-      var clock = {};
 
-      // private data fields
-      var intervalPromise;
-      var time = {
-        h: 0,
-        m: 0,
-        s: 0
-      }
 
-      clock.hours   = function () { return time.h; };
-      clock.minutes = function () { return time.m; };
-      clock.seconds = function () { return time.s; };
+  .factory('timeLogger', ['$interval',
+    function($interval) {
+      var service = {};
 
-      clock.reset = function () {
-        time.h = 0;
-        time.m = 0;
-        time.s = 0;
-      };
+      // This will be persistent in localStorage at some point. Mocking it out in 
+      // memory for now.
+      service.entries = [];
 
-      clock.start = function () {
-        clock.reset();
+      service.current = new Timer();
 
-        var startMillis = Date.now()
+      return service;
 
-        var tick = function () {
-          var elapsedMillis = Date.now() - startMillis;
-          time = timeFromMilliseconds(elapsedMillis);
+      // private classes and helpers
+
+      function Timer() {
+        var intervalPromise;
+        var time = {
+          hours:   0,
+          minutes: 0,
+          seconds: 0
         };
 
-        intervalPromise = $interval(tick, 1000);
-      };
+        this.hours   = function () { return time.hours; };
+        this.minutes = function () { return time.minutes; };
+        this.seconds = function () { return time.seconds; };
 
-      clock.stop = function () {
-        $interval.cancel(intervalPromise);
-      };
+        this.reset = function () {
+          time.hours   = 0;
+          time.minutes = 0;
+          time.seconds = 0;
+        };
 
-      return clock;
+        this.running = false;
 
-      // private functions
+        this.start = function () {
+          this.reset();
+          this.running = true;
 
-      function timeFromMilliseconds(millis) {
-        var time = {};
+          var startMillis = Date.now();
 
-        // throw away millisecond precision
-        var seconds = Math.floor(millis/1000);
+          var tick = function () {
+            var elapsedMillis = Date.now() - startMillis;
+            time = timeFromMilliseconds(elapsedMillis);
+          };
 
-        time.h = Math.floor(seconds/3600);
-        seconds = seconds % 3600;
-        time.m = Math.floor(seconds/60);
-        time.s = seconds % 60;
+          intervalPromise = $interval(tick, 1000);
+        };
 
-        return time;
+        this.stop = function () {
+          this.running = false;
+          $interval.cancel(intervalPromise);
+        };
+
+        function timeFromMilliseconds(millis) {
+          var time = {};
+
+          // throw away millisecond precision
+          var seconds = Math.floor(millis/1000);
+
+          time.hours   = Math.floor(seconds/3600);
+          seconds = seconds % 3600;
+          time.minutes = Math.floor(seconds/60);
+          time.seconds = seconds % 60;
+
+          return time;
+        }
       }
     }]);
