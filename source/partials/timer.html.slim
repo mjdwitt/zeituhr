@@ -20,19 +20,10 @@
       table.pure-table.pure-table-striped
         thead
           tr
-            th Date
-            th Code
-            th Memo
-            th Time
+            th timer
         tbody
           tr ng-repeat="time in times"
             td
-              | {{ time.date() }}
-            td
-              | {{ time.code() }}
-            td
-              | {{ time.description() }}
-            td
-              | {{ time.duration() }}
+              | {{ time }}
 
     .pure-u-1-8
