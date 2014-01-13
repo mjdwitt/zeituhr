@@ -2,17 +2,27 @@ angular.module('timer', [
   'ngRoute',
   'timerControllers',
   'timerFilters',
-  'timerFactories'
-]).
+  'timerFactories',
+  'timerDirectives'
+])
 
-  config(['$routeProvider',
+  .config(['$routeProvider',
     function ($routeProvider) {
-      $routeProvider.
-        when('/', {
+      $routeProvider
+        .when('/', {
           templateUrl: 'partials/timer.html',
           controller: 'timerCtrl'
-        }).
-        otherwise({
+        })
+        .when('/logs', {
+          templateUrl: 'partials/logs.html',
+          controller: 'logsCtrl'
+        })
+        .otherwise({
           redirectTo: '/'
         });
+    }])
+  
+  .config(['$locationProvider',
+    function ($locationProvider) {
+      $locationProvider.html5Mode(true);
     }]);

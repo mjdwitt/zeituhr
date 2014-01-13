@@ -15,12 +15,30 @@ html ng-app="timer"
       'app',
       'controllers',
       'filters',
-      'factories'
+      'factories',
+      'directives'
 
   body
-    header
-      h1 Zeituhr
+    nav.pure-menu.pure-menu-open.pure-menu-horizontal.pure-menu-fixed
+      a.pure-menu-heading timer-logo="" href="/#/"
+        | Zeituhr
+      ul
+        li
+          a timer-current-page="" href="/#/"
+            | Home
+        li
+          a timer-current-page="" href="/#/logs"
+            | Logs
+        li
+          a timer-current-page="" href="/#/about"
+            | About
 
     main ng-view=""
 
     footer
+      #debug ng-controller="debugCtrl"
+        h2 Debug
+
+        pre
+          code
+            | location.path(): {{ location.path() }}

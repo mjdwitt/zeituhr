@@ -1,9 +1,18 @@
 angular.module('timerControllers', ['timerFactories'])
 
+
+
+  .controller('debugCtrl', ['$scope', '$location',
+    function($scope, $location) {
+      $scope.location = $location;
+    }])
+
+
+
   .controller('timerCtrl', ['$scope', 'timeLogger',
     function ($scope, timeLogger) {
       $scope.clock = timeLogger.timer();
-      $scope.times = timeLogger.entries();
+      $scope.logs = timeLogger.entries();
 
       $scope.buttonMessage = 'Start';
 
@@ -19,4 +28,11 @@ angular.module('timerControllers', ['timerFactories'])
           $scope.buttonMessage = 'Stop';
         }
       };
+    }])
+
+
+
+  .controller('logsCtrl', ['$scope', 'timeLogger',
+    function ($scope, timeLogger) {
+      $scope.logs = timeLogger.entries();
     }]);
