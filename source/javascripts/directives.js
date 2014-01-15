@@ -37,4 +37,17 @@ angular.module('timerDirectives', [])
           });
         }
       };
+    }])
+
+
+
+  .directive('timerLogTable', [
+    function() {
+      return {
+        restrict: 'E',
+        templateUrl: 'partials/timer-log-table.html',
+        scope: {
+          logs: '='
+        }
+      };
     }]);

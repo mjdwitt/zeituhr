@@ -29,13 +29,13 @@ Here's what I've actually got working so far:
 - Toggle the start/stop button
 - Start timer when button is pressed and update display every second.
 - Stop timer when the button is pressed again.
+- Store all of that in localStorage. (This one really matters.)
 
 And here's what Zeituhr *ought* to do in a little while:
 
 - Prompt user to write down what it was that they were doing while the clock 
   ran.
 - Allow them to enter a project/client code as well.
-- Store all of that in localStorage. (This one really matters.)
 - Display a summary of the last 24 hours below the button.
 
 And here's a more vague wish-list for the future:

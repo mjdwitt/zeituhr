@@ -11,7 +11,7 @@ header
 
 #timer.center
   a.pure-button class="running-{{clock.running}}" ng-click="toggleTimer()"
-    | {{buttonMessage}} Timer
+    | {{buttonMessage()}} Timer
 
 #recent
   .pure-g-r
@@ -20,13 +20,11 @@ header
     .pure-u-3-4
       h2 Recent logs
 
-      table.pure-table.pure-table-striped
-        thead
-          tr
-            th timer
-        tbody
-          tr ng-repeat="time in times"
-            td
-              | {{ time }}
+      timer-log-table logs="logs"
+
+      p
+        a.pure-button.right href="#/logs"
+          | More 
+          i.fa.fa-caret-right
 
     .pure-u-1-8

@@ -1,27 +1,48 @@
-angular.module('timerFactories', [])
+angular.module('timerFactories', [
+  'LocalStorageModule'
+])
+
+  .config(['localStorageServiceProvider',
+    function (localStorageServiceProvider) {
+      localStorageServiceProvider.setPrefix('zeituhr');
+    }])
 
 
 
-  .factory('timeLogger', ['$interval',
-    function($interval) {
+  .factory('timeLogger', ['$interval', 'localStorageService',
+    function($interval, localStorageService) {
       var service = {};
 
       // This will be persistent in localStorage at some point. Mocking it out in 
       // memory for now.
-      var entries = [];
-      var tid = 0;
       var timer = new Timer();
-
-      service.entries = function () { return entries; };
       service.timer   = function () { return timer; };
+
+      var entries = loadEntries();
+      service.entries = function () { return entries; };
 
       service.logCurrent = function () {
         entries.unshift(timer.toLog());
+        localStorageService.add('entries', entries);
+      };
+
+      service.clearLogs = function () {
+        while (entries.length > 0) { entries.pop(); }
+        localStorageService.remove('entries');
       };
 
       return service;
 
       // private classes and helpers
+
+      function loadEntries() {
+        return (_(localStorageService.get('entries') || [])
+          .map(function(log) {
+            log.date = new Date(Date.parse(log.date));
+            return log;
+          })
+        );
+      }
 
       function Timer() {
         var intervalPromise;

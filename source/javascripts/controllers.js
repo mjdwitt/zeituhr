@@ -14,18 +14,18 @@ angular.module('timerControllers', ['timerFactories'])
       $scope.clock = timeLogger.timer();
       $scope.logs = timeLogger.entries();
 
-      $scope.buttonMessage = 'Start';
+      $scope.buttonMessage = function () {
+        return $scope.clock.running ? 'Stop' : 'Start';
+      };
 
       $scope.toggleTimer = function () {
         if ($scope.clock.running) {
           $scope.clock.stop();
           timeLogger.logCurrent();
           $scope.clock.running = false;
-          $scope.buttonMessage = 'Start';
         } else {
           $scope.clock.start();
           $scope.clock.running = true;
-          $scope.buttonMessage = 'Stop';
         }
       };
     }])
@@ -35,4 +35,5 @@ angular.module('timerControllers', ['timerFactories'])
   .controller('logsCtrl', ['$scope', 'timeLogger',
     function ($scope, timeLogger) {
       $scope.logs = timeLogger.entries();
+      $scope.clearLogs = timeLogger.clearLogs
     }]);

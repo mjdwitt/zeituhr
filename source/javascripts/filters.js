@@ -1,18 +1,32 @@
-angular.module('timerFilters', []).
+angular.module('timerFilters', [])
 
-  filter('minDigits', function () {
-    return function (input, digits) {
-      var n = parseInt(input);
-      digits = parseInt(digits);
+  .filter('minDigits', function () {
+    return minDigits;
+  })
 
-      // sanity check
-      if (isNaN(n) || isNaN(digits)) { return input; }
+  .filter('prettyPrintDate', function () {
+    return function (then) {
+      var now = new Date();
+    };
+  })
 
-      n = '' + n;
-      while (n.length < digits) {
-        n = '0' + n;
-      }
-
-      return n;
+  .filter('prettyPrintDuration', function () {
+    return function (time) {
+      return (minDigits(time.hours, 2) + ":" + minDigits(time.minutes, 2) + ":" + minDigits(time.seconds, 2));
     };
   });
+
+function minDigits (input, digits) {
+  var n = parseInt(input);
+  digits = parseInt(digits);
+
+  // sanity check
+  if (isNaN(n) || isNaN(digits)) { return input; }
+
+  n = '' + n;
+  while (n.length < digits) {
+    n = '0' + n;
+  }
+
+  return n;
+}
