@@ -37,6 +37,9 @@ And here's what Zeituhr *ought* to do in a little while:
   ran.
 - Allow them to enter a project/client code as well.
 - Display a summary of the last 24 hours below the button.
+- Allow editing of past entries.
+- Allow removal of individual entries.
+- Add filtering of all kinds over the entries.
 
 And here's a more vague wish-list for the future:
 
