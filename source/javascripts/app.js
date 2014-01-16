@@ -20,9 +20,4 @@ angular.module('timer', [
         .otherwise({
           redirectTo: '/'
         });
-    }])
-
-  .config(['$locationProvider',
-    function ($locationProvider) {
-      $locationProvider.html5Mode(true);
     }]);
