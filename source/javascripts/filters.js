@@ -1,32 +1,41 @@
 angular.module('timerFilters', [])
 
   .filter('minDigits', function () {
-    return minDigits;
-  })
+    return function (input, digits) {
+      var n = parseInt(input);
+      digits = parseInt(digits);
 
-  .filter('prettyPrintDate', function () {
-    return function (then) {
-      var now = new Date();
+      // sanity check
+      if (isNaN(n) || isNaN(digits)) { return input; }
+
+      n = '' + n;
+      while (n.length < digits) {
+        n = '0' + n;
+      }
+
+      return n;
     };
   })
 
-  .filter('prettyPrintDuration', function () {
+  .filter('momentCalendar', function () {
+    return function (date) {
+      return date.calendar();
+    };
+  })
+
+  .filter('duration', function () {
     return function (time) {
-      return (minDigits(time.hours, 2) + ":" + minDigits(time.minutes, 2) + ":" + minDigits(time.seconds, 2));
+      time = moment.duration(time);
+      var str = "";
+
+      if (time.as('seconds') < 60) {
+        str = time.seconds() + ' seconds';
+      } else if (time.as('minutes') < 60) {
+        str = time.minutes() + ' minutes';
+      } else {
+        str = Math.floor(time.as('hours')) + 'h ' + time.minutes() + 'm';
+      }
+
+      return str;
     };
   });
-
-function minDigits (input, digits) {
-  var n = parseInt(input);
-  digits = parseInt(digits);
-
-  // sanity check
-  if (isNaN(n) || isNaN(digits)) { return input; }
-
-  n = '' + n;
-  while (n.length < digits) {
-    n = '0' + n;
-  }
-
-  return n;
-}

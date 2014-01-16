@@ -38,7 +38,7 @@ angular.module('timerFactories', [
       function loadEntries() {
         return (_(localStorageService.get('entries') || [])
           .map(function(log) {
-            log.date = new Date(Date.parse(log.date));
+            log.date = moment(log.date);
             return log;
           })
         );
@@ -49,25 +49,19 @@ angular.module('timerFactories', [
         var date;
         var code;
         var memo;
-        var time = {
-          hours:   0,
-          minutes: 0,
-          seconds: 0
-        };
+        var time = moment.duration();
 
-        this.hours   = function () { return time.hours; };
-        this.minutes = function () { return time.minutes; };
-        this.seconds = function () { return time.seconds; };
+        this.hours   = function () { return time.hours();   };
+        this.minutes = function () { return time.minutes(); };
+        this.seconds = function () { return time.seconds(); };
 
-        this.date = function () { return date.toDateString(); };
-        this.time = function () { return date.toTimeString(); };
+        this.date = function () { return date.calendar(); };
+        this.time = function () { return time.humanize(); };
         this.code = function () {};
         this.memo = function () {};
 
         this.reset = function () {
-          time.hours   = 0;
-          time.minutes = 0;
-          time.seconds = 0;
+          time = moment.duration();
         };
 
         this.running = false;
@@ -75,13 +69,10 @@ angular.module('timerFactories', [
         this.start = function () {
           this.reset();
           this.running = true;
-          date = new Date();
-
-          var startMillis = date.getTime();
+          date = moment();
 
           var tick = function () {
-            var elapsedMillis = Date.now() - startMillis;
-            time = timeFromMilliseconds(elapsedMillis);
+            time.add(moment.duration(1, 's'));
           };
 
           intervalPromise = $interval(tick, 1000);
@@ -97,28 +88,8 @@ angular.module('timerFactories', [
             date: date,
             code: this.code(),
             memo: this.memo(),
-            time: {
-              hours:   time.hours,
-              minutes: time.minutes,
-              seconds: time.seconds
-            }
+            time: time.as('milliseconds')
           };
         };
-
-
-
-        function timeFromMilliseconds(millis) {
-          var time = {};
-
-          // throw away millisecond precision
-          var seconds = Math.floor(millis/1000);
-
-          time.hours   = Math.floor(seconds/3600);
-          seconds = seconds % 3600;
-          time.minutes = Math.floor(seconds/60);
-          time.seconds = seconds % 60;
-
-          return time;
-        }
-      }
+      };
     }]);

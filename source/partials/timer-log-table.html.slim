@@ -1,8 +1,8 @@
 table.pure-table.pure-table-striped
   tr ng-repeat="log in logs"
     td.date
-      | {{ log.date | prettyPrintDate }}
+      | {{ log.date | momentCalendar }}
     td.description
       | {{ log.code }} &mdash; {{ log.memo }}
     td.duration
-      | {{ log.time | prettyPrintDuration }}
+      | {{ log.time | duration }}
