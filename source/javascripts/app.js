@@ -17,6 +17,10 @@ angular.module('timer', [
           templateUrl: 'partials/logs.html',
           controller: 'logsCtrl'
         })
+        .when('/logs/new', {
+          templateUrl: 'partials/new-log.html',
+          controller: 'newLogCtrl'
+        })
         .otherwise({
           redirectTo: '/'
         });

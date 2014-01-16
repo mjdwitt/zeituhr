@@ -1,0 +1,28 @@
+.pure-g-r
+  .pure-u-1-8
+    
+  .pure-u-3-4
+    form.pure-form.pure-form-stacked
+      fieldset
+
+        label for="code" What'd you work on?
+        input  id="code" type="text" ng-model="code" autofocus=""
+
+        label for="memo" What'd you get done? What needs done next?
+        textarea id="memo"  ng-model="memo"
+
+        label for="time" Is this the right amount of time?
+        input  id="time" type="text" ng-model="timeStr"
+
+        label for="date" Is this the right date?
+        input  id="date" type="date" ng-model="dateStr"
+
+        button.pure-button.pure-button-primary ng-click="addLog()" Submit
+        button.pure-button ng-click="cancel()" Cancel
+        button.pure-button ng-click="debugDump()" Debug dump
+
+    .logs
+      h2 Recent logs
+      timer-log-table logs="logs"
+
+  .pure-u-1-8

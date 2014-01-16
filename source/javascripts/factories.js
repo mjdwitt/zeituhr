@@ -9,8 +9,8 @@ angular.module('timerFactories', [
 
 
 
-  .factory('timeLogger', ['$interval', 'localStorageService',
-    function($interval, localStorageService) {
+  .factory('timeLogger', ['$interval', '$filter', 'localStorageService',
+    function($interval, $filter, localStorageService) {
       var service = {};
 
       // This will be persistent in localStorage at some point. Mocking it out in 
@@ -55,10 +55,33 @@ angular.module('timerFactories', [
         this.minutes = function () { return time.minutes(); };
         this.seconds = function () { return time.seconds(); };
 
-        this.date = function () { return date.calendar(); };
-        this.time = function () { return time.humanize(); };
-        this.code = function () {};
-        this.memo = function () {};
+        this.date = function () {
+          return date.format("YYYY[-]MM[-]DD"); };
+        this.time = function () {
+          return $filter('duration')(time.as('milliseconds'));
+        };
+        this.code = function () { return code; };
+        this.memo = function () { return memo; };
+
+        this.setDate = function (dateStr) { date = moment(dateStr); };
+        this.setCode = function (newCode) { code = newCode; };
+        this.setMemo = function (newMemo) { memo = newMemo; };
+        this.setTime = function (timeStr) {
+          var t = {hours:0, minutes:0, seconds:0},
+              r = /([0-9]+) (minutes|seconds)|([0-9]+)h ([0-9]+)(m)/;
+
+          var result = r.exec(timeStr);
+          if (result[2] == 'h') {
+            t.hours   = result[1];
+            t.minutes = result[3];
+          } else if (result[2] == 'minutes') {
+            t.minutes = result[1];
+          } else {
+            t.seconds = result[1];
+          }
+
+          time = moment.duration(t);
+        };
 
         this.reset = function () {
           time = moment.duration();

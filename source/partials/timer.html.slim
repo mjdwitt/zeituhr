@@ -13,18 +13,17 @@ header
   a.pure-button class="running-{{clock.running}}" ng-click="toggleTimer()"
     | {{buttonMessage()}} Timer
 
-#recent
-  .pure-g-r
-    .pure-u-1-8
+.logs.pure-g-r
+  .pure-u-1-8
 
-    .pure-u-3-4
-      h2 Recent logs
+  .pure-u-3-4
+    h2 Recent logs
 
-      timer-log-table logs="logs"
+    timer-log-table logs="logs"
 
-      p.clear
-        a.pure-button.right href="#/logs"
-          | More 
-          i.fa.fa-caret-right
+    p.clear
+      a.pure-button.right href="#/logs"
+        | More 
+        i.fa.fa-caret-right
 
-    .pure-u-1-8
+  .pure-u-1-8
