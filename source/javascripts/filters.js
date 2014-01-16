@@ -29,9 +29,15 @@ angular.module('timerFilters', [])
       var str = "";
 
       if (time.as('seconds') < 60) {
-        str = time.seconds() + ' seconds';
+        str = time.seconds() + ' second';
+        if (time.seconds() != 1) {
+          str = str + 's';
+        }
       } else if (time.as('minutes') < 60) {
-        str = time.minutes() + ' minutes';
+        str = time.minutes() + ' minute';
+        if (time.minutes() != 1) {
+          str = str + 's';
+        }
       } else {
         str = Math.floor(time.as('hours')) + 'h ' + time.minutes() + 'm';
       }

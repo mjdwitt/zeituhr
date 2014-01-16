@@ -56,7 +56,7 @@ angular.module('timerFactories', [
         this.seconds = function () { return time.seconds(); };
 
         this.date = function () {
-          return date.format("YYYY[-]MM[-]DD"); };
+          return date.format("MMM D YYYY h[:]mm A"); };
         this.time = function () {
           return $filter('duration')(time.as('milliseconds'));
         };
@@ -68,15 +68,15 @@ angular.module('timerFactories', [
         this.setMemo = function (newMemo) { memo = newMemo; };
         this.setTime = function (timeStr) {
           var t = {hours:0, minutes:0, seconds:0},
-              r = /([0-9]+) (minutes|seconds)|([0-9]+)h ([0-9]+)(m)/;
+              r = /([0-9]+) (minute|second)s?|([0-9]+)(h) ([0-9]+)(m)/;
 
           var result = r.exec(timeStr);
-          if (result[2] == 'h') {
-            t.hours   = result[1];
-            t.minutes = result[3];
-          } else if (result[2] == 'minutes') {
+          if (result[4] == 'h') {
+            t.hours   = result[3];
+            t.minutes = result[5];
+          } else if (result[2] == 'minute') {
             t.minutes = result[1];
-          } else {
+          } else if (result[2] == 'second') {
             t.seconds = result[1];
           }
 

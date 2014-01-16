@@ -15,11 +15,10 @@
         input  id="time" type="text" ng-model="timeStr"
 
         label for="date" Is this the right date?
-        input  id="date" type="date" ng-model="dateStr"
+        input  id="date" type="text" ng-model="dateStr"
 
         button.pure-button.pure-button-primary ng-click="addLog()" Submit
         button.pure-button ng-click="cancel()" Cancel
-        button.pure-button ng-click="debugDump()" Debug dump
 
     .logs
       h2 Recent logs

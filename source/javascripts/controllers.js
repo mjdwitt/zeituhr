@@ -52,10 +52,6 @@ angular.module('timerControllers', ['timerFactories'])
         $location.path("/");
       };
 
-      $scope.debugDump = function () {
-        console.log($scope);
-      };
-
       $scope.addLog = function () {
         newLog.setCode($scope.code);
         newLog.setMemo($scope.memo);
