@@ -2,6 +2,8 @@ angular.module('timerFactories', [
   'LocalStorageModule'
 ])
 
+
+
   .config(['localStorageServiceProvider',
     function (localStorageServiceProvider) {
       localStorageServiceProvider.setPrefix('zeituhr');
@@ -13,8 +15,6 @@ angular.module('timerFactories', [
     function($interval, $filter, localStorageService) {
       var service = {};
 
-      // This will be persistent in localStorage at some point. Mocking it out in 
-      // memory for now.
       var timer = new Timer();
       service.timer   = function () { return timer; };
 

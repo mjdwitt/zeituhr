@@ -3,6 +3,9 @@ table.pure-table.pure-table-striped
     td.date
       | {{ log.date | momentCalendar }}
     td.description
-      | {{ log.code }} &mdash; {{ log.memo }}
+      span.code
+        | {{ log.code }} <br/>
+      span.memo
+        | {{ log.memo }}
     td.duration
       | {{ log.time | duration }}

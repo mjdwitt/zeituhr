@@ -2,13 +2,6 @@ angular.module('timerControllers', ['timerFactories'])
 
 
 
-  .controller('debugCtrl', ['$scope', '$location',
-    function($scope, $location) {
-      $scope.location = $location;
-    }])
-
-
-
   .controller('timerCtrl', ['$scope', '$location', 'timeLogger',
     function ($scope, $location, timeLogger) {
       $scope.clock = timeLogger.timer();
@@ -61,4 +54,10 @@ angular.module('timerControllers', ['timerFactories'])
         newLog.reset();
         $location.path("/");
       };
+    }])
+
+
+
+  .controller('aboutCtrl', [
+    function () {
     }]);
