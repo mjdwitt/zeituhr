@@ -9,8 +9,12 @@ users at some point in the future and extend this to use that. Who knows.
 
 ## Demo
 
-I currently don't have Zeituhr up and running anywhere, so you'll have to build 
-it yourself.
+~~I currently don't have Zeituhr up and running anywhere, so you'll have to 
+build it yourself.~~
+
+More progress: an official demo can be found at 
+[zeituhr.hackfoolery.com](http://zeituhr.hackfoolery.com). Of course, you can 
+still build it yourself if you prefer.
 
 ## Building
 
